@@ -85,6 +85,7 @@ static const keymap_t keys[] = {
     /* modifiers    key               function              argument */
     { 0,            24, /*XK_q,*/             g_quit,               None },
     { 0,            36, /*XK_Return,*/        g_switch_mode,        None },
+    { 0,            65, /*XK_space,*/         g_switch_mode,        None },
     { 0,            41, /*XK_f,*/             g_toggle_fullscreen,  None },
     { 0,            56, /*XK_b,*/             g_toggle_bar,         None },
     { ControlMask,  53, /*XK_x,*/             g_prefix_external,    None },
@@ -122,9 +123,7 @@ static const keymap_t keys[] = {
     { 0,            46, /*XK_l,*/             t_move_sel,           DIR_RIGHT },
     { 0,            114, /*XK_Right,*/        t_move_sel,           DIR_RIGHT },
     { 0,            57, /*XK_n,*/             i_navigate,           +1 },
-    { 0,            65, /*XK_space,*/         i_navigate,           +1 },
     { 0,            33, /*XK_p,*/             i_navigate,           -1 },
-    { 0,            22, /*XK_BackSpace,*/     i_navigate,           -1 },
     { 0,            35, /*XK_bracketright,*/  i_navigate,           +10 },
     { 0,            34, /*XK_bracketleft,*/   i_navigate,           -10 },
     { ShiftMask,    57, /*XK_N,*/             g_navigate_marked,    +1 },
