@@ -6,14 +6,14 @@ static const int WIN_HEIGHT = 600;
 
 /* colors and font can be overwritten via X resource properties.
  * See nsxiv(1), X(7) section Resources and xrdb(1) for more information.
- */
-static const char *DEFAULT_WIN_BG     = "#222222";
-static const char *DEFAULT_WIN_FG     = "#bbbbbb";
-static const char *DEFAULT_MARK_COLOR = "#ff0000";  /* NULL means it will default to window foreground */
+ *                                      X resource            value (NULL == default) */
+static const char *WIN_BG[]   = { "Nsxiv.window.background",   "white" };
+static const char *WIN_FG[]   = { "Nsxiv.window.foreground",   "black" };
+static const char *MARK_FG[]  = { "Nsxiv.mark.foreground",      NULL };
 #if HAVE_LIBFONTS
-static const char *DEFAULT_BAR_BG     = NULL;  /* NULL means it will default to window background */
-static const char *DEFAULT_BAR_FG     = NULL;  /* NULL means it will default to window foreground */
-static const char *DEFAULT_FONT       = "xos4 Terminus:pixelsize=12:antialias=true:autohint=true";
+static const char *BAR_BG[]   = { "Nsxiv.bar.background",       NULL };
+static const char *BAR_FG[]   = { "Nsxiv.bar.foreground",       NULL };
+static const char *BAR_FONT[] = { "Nsxiv.bar.font",            "monospace-8" };
 
 /* if true, statusbar appears on top of the window */
 static const bool TOP_STATUSBAR = false;
@@ -26,8 +26,8 @@ static const bool TOP_STATUSBAR = false;
  * (first/last value is used as min/max zoom level)
  */
 static const float zoom_levels[] = {
-    1.0, 5.0, 12.5, 25.0, 33.3, 40.0, 50.0, 66.6, 75.0, 80.0, 90.0,
-    100.0, 125.0, 150.0, 175.0, 200.0, 250.0, 300.0, 350.0, 400.0,
+    0.125, 0.25, 0.5, 1.0, 2.5, 5.0, 7.5, 12.5, 25.0, 33.3, 40.0, 50.0, 66.6, 75.0,
+    80.0, 90.0, 100.0, 125.0, 150.0, 175.0, 200.0, 250.0, 300.0, 350.0, 400.0,
     500.0, 600.0, 700.0, 800.0, 900.0, 1000.0, 2000.0, 5000.0, 10000.0
 };
 
