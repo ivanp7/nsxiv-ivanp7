@@ -124,6 +124,14 @@ as an argument, disables it instead.
 Enables checkerboard background for alpha layer, when given
 .I no
 as an argument, disables it instead.
+.TP
+.BI "\-\-cache\-allow, \-\-cache\-deny " "CACHE\-PATHS"
+List of directories to whitelist or blacklist for thumbnail caching.
+See
+.I "THUMBNAIL CACHING"
+section for more information on the argument format.
+These options are mutually exclusive, if they are specified more than once then
+only the final one takes effect.
 .SH KEYBOARD COMMANDS
 .SS General
 The following keyboard commands are available in both image and thumbnail modes:
@@ -134,6 +142,10 @@ Prefix the next command with a number (denoted via
 .TP
 .B q
 Quit nsxiv.
+.TP
+.B Q
+Quit nsxiv, but additionally print the current filename when \-o is active and
+no files have been marked.
 .TP
 .BR Return ", " Space
 Switch to thumbnail mode / open selected image in image mode.
@@ -442,7 +454,9 @@ Zoom in 3x faster.
 .B Ctrl-Button5
 Zoom out 3x faster.
 .SH CONFIGURATION
-The following X resources are supported:
+The following X resources are supported under "Nsxiv" (e.g.
+.B Nsxiv.bar.font
+):
 .TP
 .B window.background
 Color of the window background
@@ -463,6 +477,9 @@ Color of the bar foreground. Defaults to window.foreground
 Color of the mark foreground. Defaults to window.foreground
 .TP
 Please see xrdb(1) on how to change them.
+.LP
+An X resources entry with an empty value means the default
+(defined in config.h) will be used.
 .SH WINDOW TITLE
 The window title can be replaced with the output of a user-provided script,
 which is called by nsxiv whenever any of the relevant information changes.
@@ -556,18 +573,52 @@ afterwards inside the cache directory to remove empty subdirectories:
 .RS
 find . \-depth \-type d \-empty ! \-name '.' \-exec rmdir {} \\;
 .RE
+.P
+The option
+.BR "\-\-cache\-allow " or " \-\-cache\-deny"
+may be used to whitelists or blacklist certain directories from being cached.
+The argument is a
+.B :
+separated list of paths. A
+.B *
+at the beginning of the path indicates that path should be matched recursively.
+.P
+For example:
+.B \-\-cache\-allow \(dq/user/pictures:*/media/pictures\(dq
+whitelists \(dq/user/pictures\(dq directory non-recursively and \(dq/media/pictures\(dq
+directory recursively. Nothing outside these two directories will be cached.
+And
+.B \-\-cache\-deny \(dq*/secret\(dq
+will enable blacklist mode and will not cache anything inside \(dq/secret\(dq
+or it's subdirectories.
 .SH ORIGINAL AUTHOR
 .EX
 Bert Muennich          <ber.t at posteo.de>
+.EE
+.SH CURRENT MAINTAINERS
+.EX
+NRK                    <nrk at disroot.org>
+Berke Kocaoğlu         <berke.kocaoglu at metu.edu.tr>
+TAAPArthur             <taaparthur at gmail.com>
+eylles                 <ed.ylles1997 at gmail.com>
+Stein Gunnar Bakkeby   <bakkeby at gmail.com>
+explosion-mental       <explosion0mental at gmail.com>
 .EE
 .SH CONTRIBUTORS
 .EX
 For a list of contributors, run `git shortlog -s` in the nsxiv git repository.
 .EE
 .SH HOMEPAGE
-.EX
-https://github.com/nsxiv/nsxiv
+.TP
+Website:
 .EE
+https://github.com/nsxiv/nsxiv
+.EX
+.TP
+Source code:
+.EE
+https://codeberg.org/nsxiv/nsxiv
+.EX
 .SH SEE ALSO
 .BR X (7),
 .BR xrdb (1)
